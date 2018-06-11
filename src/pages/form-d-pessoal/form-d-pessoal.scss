@@ -1,0 +1,11 @@
+page-form-d-pessoal {
+
+    .invalid {
+        border-bottom: 1px solid red;
+    }
+
+    .error-message .item.inner {
+        border-bottom: 0px !important;
+    }
+
+}

@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Cadastro</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <h1 text-center><ion-icon name="person-add" class="auth-icon"></ion-icon></h1>
+
+  <form [formGroup]="formCad" (submit)="cadastrar()" novalidate>
+    
+    <!--<ion-item>
+     <ion-icon item-left name="at"></ion-icon>
+     <ion-input [(ngModel)]="nomeUsuario" formControlName="nomeUsuario" floating type="text" placeholder="NOME DE USUÁRIO" [class.invalid]="formCad.controls.nomeUsuario.invalid && formCad.controls.nomeUsuario.dirty"></ion-input>
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="formCad.controls.nomeUsuario.invalid && formCad.controls.nomeUsuario.dirty">
+      <p>Requer nome de usuário</p>
+    </ion-item><-->
+
+    <ion-item>
+      <ion-icon item-left name="mail"></ion-icon>
+      <ion-input [(ngModel)]="email" formControlName="email" type="email" placeholder="EMAIL" [class.invalid]="formCad.controls.email.invalid && formCad.controls.email.dirty"></ion-input>
+    </ion-item>
+    
+    <ion-item class="error-message" *ngIf="formCad.controls.email.invalid && formCad.controls.email.dirty">
+      <p>Digite um email válido</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left name="lock"></ion-icon>
+      <ion-input [(ngModel)]="senha" formControlName="senha" type="password" placeholder="SENHA" [class.invalid]="formCad.controls.senha.invalid && formCad.controls.senha.dirty"></ion-input>      
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="formCad.controls.senha.invalid && formCad.controls.senha.dirty">
+      <p>Senha de ate 6 caracteres</p>
+    </ion-item>
+
+    <br>
+
+    <button ion-button block type="submit" [disabled]="!formCad.valid">CADASTRAR</button>
+  </form>
+
+  <button ion-button block clear (click)="pageLogin()">Já tenha uma conta</button>
+
+</ion-content>

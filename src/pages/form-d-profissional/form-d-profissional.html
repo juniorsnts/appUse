@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>formulario profissional</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="formProf" (submit)="salvarDados()">
+  <ion-toolbar>
+    <p text-center><strong><u>INSERIR DADOS PROFISSIONAIS</u></strong></p>
+    <ion-list>
+      <ion-item>
+        <ion-label>Profissão 1</ion-label>
+        <ion-select formControlName="profissao1" [(ngModel)]="profissao1">
+          <ion-option>profissoes</ion-option>
+          <ion-option>teste</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Valor do Serviço/hora</ion-label>
+        <ion-input formControlName="valor1" [(ngModel)]="valor1" type="number" text-right></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-item>
+          <ion-label>Profissão 2</ion-label>
+          <ion-select formControlName="profissao2" [(ngModel)]="profissao2">
+            <ion-option>profissoes</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+  
+      <ion-list>
+        <ion-item>
+          <ion-label>Valor do Serviço/hora</ion-label>
+          <ion-input formControlName="valor2" [(ngModel)]="valor2" type="number" text-right></ion-input>
+        </ion-item>
+      </ion-list>
+      <button ion-button block type="submit" [disabled]="formProf.invalid">Salvar</button>
+  </ion-toolbar>
+  </form>
+</ion-content>

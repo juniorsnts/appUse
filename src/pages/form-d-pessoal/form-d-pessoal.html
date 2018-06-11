@@ -1,0 +1,61 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>formulario Pessoal</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="formPessoal" (submit)= "salvarDados()" novalidate>
+    <ion-toolbar>
+    <p text-center><strong><u>DADOS PESSOAIS</u></strong></p>
+    
+    <ion-item>
+      <ion-input [(ngModel)]="nome" formControlName="nome" type="text" placeholder="Nome completo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="endereco" formControlName="endereco" type="text" placeholder="Endereço"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="complemento" formControlName="complemento" type="text" placeholder="Complemento"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="cidade" formControlName="cidade" type="text" placeholder="Cidade"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="estado" formControlName="estado" type="text" placeholder="Estado"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="bairro" formControlName="bairro" type="text" placeholder="Bairro"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="telefone" formControlName="telefone" type="number" placeholder="Telefone"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="cpf" formControlName="cpf" type="number" placeholder="CPF"></ion-input>
+    </ion-item>
+    <br>
+    <h2 text-center>Tirar/buscar foto para perfil</h2>
+    <h1 text-center><img src={{base64Image}}><ion-icon *ngIf="!base64Image" name="camera" class="auth-icon"></ion-icon></h1>
+    <ion-row>
+    <ion-col>
+      <button ion-button clear small color="primary" icon-left (click)="addPhoto('picture')" type="button">
+        <ion-icon name="camera"></ion-icon>
+        Camera
+      </button>
+    </ion-col>
+    <ion-col text-center>
+      <button ion-button clear small color="primary" icon-left (click)="addPhoto('gallery')" type="button">
+        <ion-icon name="albums"></ion-icon>
+        Galeria
+      </button>
+    </ion-col>
+  </ion-row>
+  </ion-toolbar>
+  <button ion-button block type="submit" [disabled] = "formPessoal.invalid">SALVAR</button>
+  </form>
+
+</ion-content>

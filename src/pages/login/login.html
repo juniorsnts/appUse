@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <br><br>
+
+  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+    <h1 text-center><ion-icon name="person-add" class="auth-icon"></ion-icon></h1>    
+
+    <ion-item>
+      <ion-icon item-left name="mail"></ion-icon>
+      <ion-input [(ngModel)] = "email" placeholder="EMAIL" formControlName="email" type="email" [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty"></ion-input>
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.dirty">
+      <p>Digite um email válido</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon item-left name="lock"></ion-icon>
+      <ion-input [(ngModel)]="senha" placeholder="SENHA" formControlName="senha" type="password" [class.invalid]="loginForm.controls.senha.invalid && loginForm.controls.senha.dirty"></ion-input>
+    </ion-item>
+
+    <ion-item class="error-message" *ngIf="loginForm.controls.senha.invalid && loginForm.controls.senha.dirty">
+      <p>Senha de ate 6 caracteres</p>
+    </ion-item>
+
+    <br>
+
+    <button ion-button block type="submit" [disabled]="loginForm.invalid">ENTRAR</button>
+  
+  </form>
+
+  <button ion-button block clear (click)="pageRecuperarSenha()">Esqueci minha senha</button>
+  <button ion-button block clear (click)="pageCadastro()">Criar conta</button>
+
+</ion-content>
