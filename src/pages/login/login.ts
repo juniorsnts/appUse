@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { AutenticacaoProvider } from '../../providers/autenticacao/autenticacao';
 import SHA_256 from 'sha256';
+import { HomePage } from '../home/home';
 
 @IonicPage({
   name: 'login'
@@ -40,7 +41,7 @@ export class LoginPage {
   pageRecuperarSenha(){
     let recupera = this.alertCtrl.create({
       title: 'Recuperar senha',
-      message: 'Digite o email da conta',
+      message: 'Digite o email da conta',      
       inputs: [{
         name: 'email',
         placeholder: 'Email'
@@ -48,7 +49,7 @@ export class LoginPage {
       buttons: [{
         text: 'enviar',
         handler: recuperar => {
-          console.log(recuperar.email);   
+          console.log(recuperar.email);
         }
       },
     {
@@ -61,21 +62,21 @@ export class LoginPage {
     recupera.present();
   }
   pageCadastro(){
-    this.navCtrl.push('cadastro');
+    this.navCtrl.setRoot('cadastro');
   }
 
   loginUser(){
     let senha_criptografada = SHA_256(this.senha);
     this.authProvider.autenticaLogin(this.email, senha_criptografada).then((resp)=>{
-      if(resp == 'sucesso'){
+      if(resp == 'sucessoLogin'){
         let toast = this.toastCrtrl.create({
           message: 'BEM VINDO',
           duration: 2500,
           position: 'bottom'
         });        
         toast.present();  
-        this.navCtrl.setRoot('dados-pessoais');
-      } else if(resp == 'noExiste'){
+        this.navCtrl.setRoot(HomePage);
+      } else if(resp == 'erroLogin'){
         let alert = this.alertCtrl.create({
           title: 'Dados inválidos',
           message: 'Email ou senha inválidos',

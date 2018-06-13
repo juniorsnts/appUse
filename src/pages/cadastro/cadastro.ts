@@ -39,21 +39,21 @@ export class CadastroPage {
   }
 
   pageLogin(){
-    this.navCtrl.push('login');
+    this.navCtrl.setRoot('login');
   }
 
   cadastrar(){
     let senha_criptografada = SHA_256(this.senha);
       this.authProvider.autenticaCadastro(this.email, senha_criptografada).then((resp)=>{
-        if(resp == 'sucesso'){
+        if(resp == 'sucessoCadastro'){
           let toast = this.toastCrtrl.create({
             message: 'CADASTRADO COM SUCESSO',
             duration: 2500,
             position: 'bottom'
           });
           toast.present();
-          this.navCtrl.setRoot('login');       
-        } else if(resp == 'Existe'){
+          this.navCtrl.setRoot('dados-pessoais');       
+        } else if(resp == 'emailExiste'){
           let alert = this.alertCtrl.create({
             title: 'Email existente',
             message: 'Esse email já foi cadastrado'

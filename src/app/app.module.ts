@@ -13,6 +13,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { AutenticacaoProvider } from '../providers/autenticacao/autenticacao';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SecureStorageProvider } from '../providers/secure-storage/secure-storage';
+import { AtualizarBdProvider } from '../providers/atualizar-bd/atualizar-bd';
 @NgModule({
   declarations: [
     MyApp,
@@ -35,7 +36,8 @@ import { SecureStorageProvider } from '../providers/secure-storage/secure-storag
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AutenticacaoProvider,
-    SecureStorageProvider
+    SecureStorageProvider,
+    AtualizarBdProvider
   ]
 })
 export class AppModule {}

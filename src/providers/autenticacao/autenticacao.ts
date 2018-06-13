@@ -18,7 +18,7 @@ export class AutenticacaoProvider {
     });
 
     return new Promise((resolve, reject)=>{
-      this.http.post(this.serverURL+'/logar', data, {headers: {'Content-Type': 'application/json'}})
+      this.http.post(this.serverURL+'/loginUsuario', data, {headers: {'Content-Type': 'application/json'}})
       .subscribe(res =>{
         resolve(res);
       }, (erro) =>{
@@ -35,7 +35,7 @@ export class AutenticacaoProvider {
     });
 
     return new Promise((resolve, reject)=>{
-      this.http.post(this.serverURL+'/cadastro', data, {headers: {'Content-Type': 'application/json'}})
+      this.http.post(this.serverURL+'/cadastroUsuario', data, {headers: {'Content-Type': 'application/json'}})
       .subscribe(res =>{
         resolve(res);
       }, (err)=>{
