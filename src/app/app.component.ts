@@ -9,7 +9,7 @@ import { HomePage } from '../pages/home/home';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = 'cadastro';
+  rootPage:any = HomePage;
 
   constructor(
     platform: Platform, 
@@ -21,18 +21,6 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-    //utilizando dados do firebase para conexao
-    
-
-    //verificacao de autenticacao do usuario
-    /*const autenticado = firebase.auth().onAuthStateChanged((usuario)=>{
-      if(!usuario){
-        this.rootPage = 'cadastro';
-      }
-      else{
-        this.rootPage = HomePage;
-      }
-    }); */
   }
 }
 

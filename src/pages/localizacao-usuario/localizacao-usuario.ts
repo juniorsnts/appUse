@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { Geolocation, GeolocationOptions, Geoposition } from '@ionic-native/geolocation';
+import { DadosFormulariosProvider } from '../../providers/dados-formularios/dados-formularios';
+import { HomePage } from '../home/home';
 
 declare var google;
 
@@ -18,7 +20,14 @@ export class LocalizacaoUsuarioPage {
   optionGeolocation: GeolocationOptions;
   currentPosition: Geoposition
   
+  latitudeReal: any;
+  longitudeReal: any;
+  latitude: any;
+  longitude: any;
+  
   constructor(
+    private toastCtrl: ToastController,
+    private dadosFormulario: DadosFormulariosProvider,
     private alertCtrl: AlertController,
     private geolocation: Geolocation,
     public navCtrl: NavController, 
@@ -38,10 +47,10 @@ export class LocalizacaoUsuarioPage {
     this.geolocation.getCurrentPosition(this.optionGeolocation)
     .then((position: Geoposition)=>{
       this.currentPosition = position;
+      this.latitudeReal = position.coords.latitude;
+      this.longitudeReal = position.coords.longitude;
       this.adicionaMapa(position.coords.latitude, position.coords.longitude);
-      this.adicionaMarcador(position.coords.latitude, position.coords.longitude);
-      //adiciona no banco a localizacao atual
-      console.log("adicionando no banco a localizacao", position);
+      this.adicionaMarcador();
     }, (error: PositionError) =>{
       alert("error:" + error.message);
     });
@@ -58,7 +67,7 @@ export class LocalizacaoUsuarioPage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOption);
   }
   
-  adicionaMarcador(lat, lng){
+  adicionaMarcador(){
     let marcador = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
@@ -66,21 +75,21 @@ export class LocalizacaoUsuarioPage {
       draggable: true
     });
 
-    let mensagem = "<p>Arraste para sua casa</p>"
+    let mensagem = "<p>Arraste para próximo de sua casa</p>"
     let janela = new google.maps.InfoWindow({
       content: mensagem
     });   
-    this.movimentoMarcador(marcador, janela);
+    janela.open(this.map, marcador);
+    this.movimentoMarcador(marcador);
   }
 
-  movimentoMarcador(marcador, janela){
+  movimentoMarcador(marcador){
     google.maps.event.addListener(marcador, 'dragend', (respEvent)=>{
       this.geolocation.getCurrentPosition(this.optionGeolocation)
       .then((position: Geoposition)=>{
         let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        janela.open(this.map, marcador);
-        //atualiza no banco caso o marcador seja movido
-        console.log(respEvent.latLng.lat(), respEvent.latLng.lng());
+        this.latitude = respEvent.latLng.lat();
+        this.longitude = respEvent.latLng.lng();
       });
     });
   }
@@ -92,14 +101,58 @@ export class LocalizacaoUsuarioPage {
       buttons: [{
         text: 'confirmar',
         handler: ()=>{
-          //passa para a proxima pagina
+          if(this.latitude == null && this.longitude == null){
+            let data = JSON.stringify({
+              email: this.navParams.get('email'),
+              latitude: this.latitudeReal,
+              longitude: this.longitudeReal
+            });
+            this.dadosFormulario.dadosLocalizacao(data).then(resp => {
+              if(resp == "sucesso"){
+                let toast = this.toastCtrl.create({
+                  message: 'Dados Cadastrados',
+                  duration: 2000,
+                  position: 'bottom'
+                });
+                toast.present();
+                this.navCtrl.setRoot(HomePage);               
+              } else {
+                let alert = this.alertCtrl.create({
+                  message: 'Algo inesperado ocorreu!!! Tente mais tarde',
+                  buttons: [{text: 'ok'}]
+                });
+                alert.present();
+              }              
+            });
+                        
+          } else {   
+            let data = JSON.stringify({
+              email: this.navParams.get('email'),
+              latitude: this.latitude,
+              longitude: this.longitude
+            });   
+            this.dadosFormulario.dadosLocalizacao(data).then(resp => {
+              if(resp == "sucesso"){
+                let toast = this.toastCtrl.create({
+                  message: 'Dados Cadastrados',
+                  duration: 2000,
+                  position: 'bottom'
+                });
+                toast.present(); 
+                this.navCtrl.setRoot(HomePage); 
+              } else {
+                let alert = this.alertCtrl.create({
+                  message: 'Algo inesperado ocorreu!!! Tente mais tarde',
+                  buttons: [{text: 'ok'}]
+                });
+                alert.present();
+              }    
+            });     
+          }          
         }
       },
     {
-      text: 'cancelar',
-      handler: () =>{
-        console.log('cancel is clicked');
-      }
+      text: 'cancelar'
     }]
     });
     alertConfirma.present();

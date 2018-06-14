@@ -43,4 +43,15 @@ export class DadosFormulariosProvider {
     });
   }
 
+  dadosLocalizacao(data){
+    return new Promise((resolve, reject) => {
+      this.http.post(this.serverURL+'/localizacaoUsuario', data, {headers: {"Content-Type": "application/json"}})
+      .subscribe(res =>{
+        resolve(res);
+      }, err =>{
+        resolve(err);
+      });
+    });
+  }
+
 }
