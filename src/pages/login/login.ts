@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { AutenticacaoProvider } from '../../providers/autenticacao/autenticacao';
 import SHA_256 from 'sha256';
 import { HomePage } from '../home/home';
+import { AtualizarBdProvider } from '../../providers/atualizar-bd/atualizar-bd';
 
 @IonicPage({
   name: 'login'
@@ -21,6 +22,7 @@ export class LoginPage {
   senha = "";
 
   constructor(
+    private atualizabdProvider: AtualizarBdProvider,
     private toastCrtrl: ToastController,
     private authProvider: AutenticacaoProvider,
     public alertCtrl: AlertController,
@@ -49,7 +51,31 @@ export class LoginPage {
       buttons: [{
         text: 'enviar',
         handler: recuperar => {
-          console.log(recuperar.email);
+          this.atualizabdProvider.esqueciSenha(recuperar.email).then(resp => {
+            console.log(resp);
+            if(resp == "semCadastro"){
+              let toast = this.toastCrtrl.create({
+                message: "Este email não esta cadastrado",
+                duration: 2000,
+                position: "middle"
+              });
+              toast.present();
+            } else if(resp == "emailFalha"){
+              let toast = this.toastCrtrl.create({
+                message: "Falha ao enviar email, tente mais tarde",
+                duration: 2000,
+                position: "middle"
+              });
+              toast.present();
+            } else if(resp == "emailEnviado"){
+              let toast = this.toastCrtrl.create({
+                message: "Email com a nova senha enviado com sucesso para: "+recuperar.email,
+                duration: 2000,
+                position: "middle"
+              });
+              toast.present();              
+            }
+          });
         }
       },
     {

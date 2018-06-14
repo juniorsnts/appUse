@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { DadosFormulariosProvider } from '../../providers/dados-formularios/dados-formularios';
 
 @IonicPage({
   name: 'dados-pessoais'
@@ -21,11 +22,13 @@ export class FormDPessoalPage {
   bairro = "";
   telefone = "";
   cpf = "";
-  base64Image;
+  base64Image = "";
   
   formPessoal: FormGroup;
 
   constructor(
+    private toastCtrl: ToastController,
+    private dadosFormulario: DadosFormulariosProvider,
     private camera: Camera,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
@@ -73,13 +76,47 @@ export class FormDPessoalPage {
   }
 
   salvarDados(){
+    let data = JSON.stringify({
+      email: this.navParams.get('email'),
+      nome: this.nome,
+      endereco: this.endereco,
+      complemento: this.complemento,
+      cidade: this.cidade,
+      estado: this.estado,
+      bairro: this.bairro,
+      telefone: this.telefone,
+      cpf: this.cpf,
+      fotoPerfl: this.base64Image
+    });
     let confirmar = this.alertCtrl.create({
       title: 'Seus dados estão corretos?',
       message: 'Você podera alterar esses dados depois',
       buttons: [{
         text: 'Confirmar',
         handler: ()=>{
-          //dados pra enviar pro bd
+          this.dadosFormulario.dadosPessoais(data).then(res => {
+            if(res == "existeCpf"){
+               let alert = this.alertCtrl.create({
+                 message: 'O CPF digitado já existe em outro usuário',
+                 buttons: [{text: 'ok'}]
+               });
+               alert.present();
+            } else if (res == "sucesso"){
+              let toast = this.toastCtrl.create({
+                message: 'Dados Cadastrados',
+                duration: 2000,
+                position: 'bottom'
+              });
+              toast.present();
+              this.navCtrl.setRoot('dados-profissionais', {email: this.navParams.get('email')});
+            } else {
+              let alert = this.alertCtrl.create({
+                message: 'Algo inesperado ocorreu!!! Tente mais tarde',
+                buttons: [{text: 'ok'}]
+              });
+              alert.present();
+            }    
+          });
         }
       },
     {

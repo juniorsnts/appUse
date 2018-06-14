@@ -14,9 +14,8 @@
     <ion-list>
       <ion-item>
         <ion-label>Profissão 1</ion-label>
-        <ion-select formControlName="profissao1" [(ngModel)]="profissao1">
-          <ion-option>profissoes</ion-option>
-          <ion-option>teste</ion-option>
+        <ion-select formControlName="profissao1"  [(ngModel)]="profissao1">
+          <ion-option *ngFor="let profissao of profissoesDados">{{profissao.profissao}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -32,7 +31,7 @@
         <ion-item>
           <ion-label>Profissão 2</ion-label>
           <ion-select formControlName="profissao2" [(ngModel)]="profissao2">
-            <ion-option>profissoes</ion-option>
+            <ion-option *ngFor="let profissao of profissoesDados">{{profissao.profissao}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-list>

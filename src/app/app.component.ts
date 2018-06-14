@@ -9,7 +9,7 @@ import { HomePage } from '../pages/home/home';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = 'login';
+  rootPage:any = 'cadastro';
 
   constructor(
     platform: Platform, 

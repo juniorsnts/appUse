@@ -14,6 +14,7 @@ import { AutenticacaoProvider } from '../providers/autenticacao/autenticacao';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SecureStorageProvider } from '../providers/secure-storage/secure-storage';
 import { AtualizarBdProvider } from '../providers/atualizar-bd/atualizar-bd';
+import { DadosFormulariosProvider } from '../providers/dados-formularios/dados-formularios';
 @NgModule({
   declarations: [
     MyApp,
@@ -37,7 +38,8 @@ import { AtualizarBdProvider } from '../providers/atualizar-bd/atualizar-bd';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AutenticacaoProvider,
     SecureStorageProvider,
-    AtualizarBdProvider
+    AtualizarBdProvider,
+    DadosFormulariosProvider
   ]
 })
 export class AppModule {}

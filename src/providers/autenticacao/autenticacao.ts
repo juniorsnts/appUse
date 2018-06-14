@@ -28,7 +28,6 @@ export class AutenticacaoProvider {
   }
 
   autenticaCadastro(email, senha){
-
     let data = JSON.stringify({
       email: email,
       senha: senha

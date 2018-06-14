@@ -15,7 +15,8 @@ export class AtualizarBdProvider {
       email: email
     });
     return new Promise((resolve, reject) => {
-      this.http.post(this.serverURL+'/esqueciSenha', data).subscribe(res =>{
+      this.http.post(this.serverURL+'/esqueciSenha', data, {headers: {"Content-Type": "application/json"}})
+      .subscribe(res =>{
         resolve(res);
       }, err => {
         resolve("erroEsqueciSenha");

@@ -52,7 +52,7 @@ export class CadastroPage {
             position: 'bottom'
           });
           toast.present();
-          this.navCtrl.setRoot('dados-pessoais');       
+          this.navCtrl.setRoot('dados-pessoais', {email: this.email});       
         } else if(resp == 'emailExiste'){
           let alert = this.alertCtrl.create({
             title: 'Email existente',
