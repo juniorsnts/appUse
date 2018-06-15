@@ -12,6 +12,8 @@ export class HomePage {
   dadosProfissionais: any;
   dadosLocalizacao: any;
   fotoperfil = "";
+  complemento = "";
+  dados = [];
 
   constructor(
     private navParams: NavParams,
@@ -25,8 +27,9 @@ export class HomePage {
       console.log("email: => "+this.navParams.get('email'));
 
       this.getDados.dadosUsuarioPessoal(data).then(resp =>{
-        this.dadosPessoais = resp;
+        this.dadosPessoais = resp;      
         this.fotoperfil = this.dadosPessoais.fotoperfil;
+        this.complemento = this.dadosPessoais.complemento;
         console.log(this.dadosPessoais);
       });
 

@@ -69,7 +69,9 @@ export class FormDPessoalPage {
       options.sourceType = this.camera.PictureSourceType.PHOTOLIBRARY;
     }
     this.camera.getPicture(options).then((imageData)=>{
-      this.base64Image = 'data:image/jpeg;base64,'+imageData;      
+      this.base64Image = 'data:image/jpeg;base64,'+imageData;   
+      //ENVIAR PRO SERVIDOR E SALVAR O CAMINHO NO BANCO COM O NOME DO USUARIO
+      console.log(this.base64Image);   
     }, (err) => {
       console.log('imagem nao carregada');
     });     
@@ -86,7 +88,7 @@ export class FormDPessoalPage {
       bairro: this.bairro,
       telefone: this.telefone,
       cpf: this.cpf,
-      fotoPerfl: this.base64Image
+      fotoPerfil: this.base64Image
     });
     let confirmar = this.alertCtrl.create({
       title: 'Seus dados estão corretos?',

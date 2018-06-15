@@ -51,6 +51,7 @@
   
     <ion-list *ngFor="let dadospessoais of dadosPessoais">
       <ion-toolbar>
+          <p text-center><strong><u>DADOS PESSOAIS</u></strong></p>
       <ion-item>
         <ion-label>Nome Completo: </ion-label>
         <ion-label><strong>{{dadospessoais.nome}}</strong></ion-label>                                
@@ -61,7 +62,7 @@
         <ion-label><strong>{{dadospessoais.endereco}}</strong></ion-label>
       </ion-item>
 
-      <ion-item *ngIf="dadospessoais.complemento != null">
+      <ion-item *ngIf="!complemento">
         <ion-label>Complemento: </ion-label>
         <ion-label><strong>{{dadospessoais.complemento}}</strong></ion-label>
       </ion-item>
@@ -83,6 +84,18 @@
         <ion-label><strong>{{dadospessoais.telefone}}</strong></ion-label>
       </ion-item>
     </ion-toolbar>
+    </ion-list>
+
+    <ion-list>
+      <ion-toolbar>
+          <p text-center><strong><u>DADOS PROFISSIONAIS</u></strong></p>
+      </ion-toolbar>
+    </ion-list>
+
+    <ion-list>
+      <ion-toolbar>
+          <p text-center><strong><u>DADOS DE LOCALIZACÃO</u></strong></p>
+      </ion-toolbar>
     </ion-list>
     
 </ion-content>
