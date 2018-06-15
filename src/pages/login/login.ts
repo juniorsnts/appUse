@@ -101,7 +101,7 @@ export class LoginPage {
           position: 'bottom'
         });        
         toast.present();  
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(HomePage, {email: this.email});
       } else if(resp == 'erroLogin'){
         let alert = this.alertCtrl.create({
           title: 'Dados inválidos',

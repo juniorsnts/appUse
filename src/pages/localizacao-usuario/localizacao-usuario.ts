@@ -115,7 +115,7 @@ export class LocalizacaoUsuarioPage {
                   position: 'bottom'
                 });
                 toast.present();
-                this.navCtrl.setRoot(HomePage);               
+                this.navCtrl.setRoot(HomePage, {email: this.navParams.get('email')});              
               } else {
                 let alert = this.alertCtrl.create({
                   message: 'Algo inesperado ocorreu!!! Tente mais tarde',
@@ -139,7 +139,7 @@ export class LocalizacaoUsuarioPage {
                   position: 'bottom'
                 });
                 toast.present(); 
-                this.navCtrl.setRoot(HomePage); 
+                this.navCtrl.setRoot(HomePage, {email: this.navParams.get('email')});
               } else {
                 let alert = this.alertCtrl.create({
                   message: 'Algo inesperado ocorreu!!! Tente mais tarde',

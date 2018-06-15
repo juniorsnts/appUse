@@ -11,10 +11,11 @@ import { HomePage } from '../pages/home/home';
 import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AutenticacaoProvider } from '../providers/autenticacao/autenticacao';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { SecureStorageProvider } from '../providers/secure-storage/secure-storage';
 import { AtualizarBdProvider } from '../providers/atualizar-bd/atualizar-bd';
 import { DadosFormulariosProvider } from '../providers/dados-formularios/dados-formularios';
+import { DadosUsuarioProvider } from '../providers/dados-usuario/dados-usuario';
 @NgModule({
   declarations: [
     MyApp,
@@ -39,7 +40,8 @@ import { DadosFormulariosProvider } from '../providers/dados-formularios/dados-f
     AutenticacaoProvider,
     SecureStorageProvider,
     AtualizarBdProvider,
-    DadosFormulariosProvider
+    DadosFormulariosProvider,
+    DadosUsuarioProvider
   ]
 })
 export class AppModule {}
