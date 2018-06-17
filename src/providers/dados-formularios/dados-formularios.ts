@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DadosFormulariosProvider {
 
-  serverURL = "http://192.168.0.31:3000";
+  serverURL = "http://192.168.0.100:3000";
 
   constructor(public http: HttpClient) {
     console.log('Hello DadosFormulariosProvider Provider');

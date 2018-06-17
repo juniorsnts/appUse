@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DadosFormulariosProvider } from '../../providers/dados-formularios/dados-formularios';
+import cep from 'cep-promise';
 
 @IonicPage({
   name: 'dados-pessoais'
@@ -15,7 +16,9 @@ export class FormDPessoalPage {
 
   //dados recebidos do html(inputs) e enviar para bd
   nome = "";
+  cepUsuario = "";
   endereco = "";
+  numCasa = "";
   complemento = "";
   cidade = "";
   estado = "";
@@ -37,7 +40,9 @@ export class FormDPessoalPage {
       
       this.formPessoal = this.formBuilder.group({
         nome: ['', Validators.compose([Validators.required])],
+        cepUsuario: ['', Validators.compose([Validators.required])],
         endereco: ['', Validators.compose([Validators.required])],
+        numCasa: ['', Validators.compose([Validators.required])],
         complemento: [''],
         cidade: ['', Validators.compose([Validators.required])],
         estado: ['', Validators.compose([Validators.required])],
@@ -77,11 +82,21 @@ export class FormDPessoalPage {
     });     
   }
 
-  salvarDados(){
+  buscaCep(cepDigitado){
+    cep(cepDigitado).then(res =>{
+      this.endereco = res.street;
+      this.bairro = res.neighborhood;
+      this.cidade = res.city;
+      this.estado = res.state;
+    }); 
+  }
+
+  salvarDados(){   
     let data = JSON.stringify({
       email: this.navParams.get('email'),
       nome: this.nome,
       endereco: this.endereco,
+      numCasa: this.numCasa,
       complemento: this.complemento,
       cidade: this.cidade,
       estado: this.estado,
@@ -123,9 +138,6 @@ export class FormDPessoalPage {
       },
     {
       text: 'Cancelar',
-      handler: ()=>{
-        console.log('cancelar clicked');
-      }
     }]
     });
     confirmar.present();

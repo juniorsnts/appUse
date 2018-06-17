@@ -17,19 +17,25 @@
       <ion-input [(ngModel)]="nome" formControlName="nome" type="text" placeholder="Nome completo"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input [(ngModel)]="endereco" formControlName="endereco" type="text" placeholder="Endereço"></ion-input>
+      <ion-input [(ngModel)]="cepUsuario" formControlName="cepUsuario" type="number" (ionBlur)="buscaCep(cepUsuario)" type="number" placeholder="CEP"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input readonly="true" [(ngModel)]="endereco" formControlName="endereco" type="text" placeholder="Endereço"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="numCasa" formControlName="numCasa" type="number" placeholder="Numero da casa"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input [(ngModel)]="complemento" formControlName="complemento" type="text" placeholder="Complemento"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input [(ngModel)]="cidade" formControlName="cidade" type="text" placeholder="Cidade"></ion-input>
+      <ion-input readonly="true" [(ngModel)]="cidade" formControlName="cidade" type="text" placeholder="Cidade"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-input [(ngModel)]="estado" formControlName="estado" type="text" placeholder="Estado"></ion-input>
+        <ion-input readonly="true" [(ngModel)]="estado" formControlName="estado" type="text" placeholder="Estado"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-input [(ngModel)]="bairro" formControlName="bairro" type="text" placeholder="Bairro"></ion-input>
+        <ion-input readonly="true" [(ngModel)]="bairro" formControlName="bairro" type="text" placeholder="Bairro"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input [(ngModel)]="telefone" formControlName="telefone" type="number" placeholder="Telefone"></ion-input>

@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 //importacoes novas
+import { FileTransfer } from '@ionic-native/file-transfer';
 import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AutenticacaoProvider } from '../providers/autenticacao/autenticacao';
@@ -16,6 +17,7 @@ import { SecureStorageProvider } from '../providers/secure-storage/secure-storag
 import { AtualizarBdProvider } from '../providers/atualizar-bd/atualizar-bd';
 import { DadosFormulariosProvider } from '../providers/dados-formularios/dados-formularios';
 import { DadosUsuarioProvider } from '../providers/dados-usuario/dados-usuario';
+import { UploadFotoProvider } from '../providers/upload-foto/upload-foto';
 @NgModule({
   declarations: [
     MyApp,
@@ -32,6 +34,7 @@ import { DadosUsuarioProvider } from '../providers/dados-usuario/dados-usuario';
     HomePage
   ],
   providers: [
+    FileTransfer,
     Geolocation,
     Camera,
     StatusBar,
@@ -41,7 +44,8 @@ import { DadosUsuarioProvider } from '../providers/dados-usuario/dados-usuario';
     SecureStorageProvider,
     AtualizarBdProvider,
     DadosFormulariosProvider,
-    DadosUsuarioProvider
+    DadosUsuarioProvider,
+    UploadFotoProvider
   ]
 })
 export class AppModule {}
