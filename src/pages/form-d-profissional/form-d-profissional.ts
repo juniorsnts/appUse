@@ -3,9 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DadosFormulariosProvider } from '../../providers/dados-formularios/dados-formularios';
 
-@IonicPage({
-  name: 'dados-profissionais'
-})
+@IonicPage()
 @Component({
   selector: 'page-form-d-profissional',
   templateUrl: 'form-d-profissional.html',

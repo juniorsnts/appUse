@@ -20,10 +20,16 @@
       </ion-item>
     </ion-list>
 
-    <ion-list>
+    <ion-list *ngIf="profissao1 != 'advogado'"> 
       <ion-item>
         <ion-label>Valor do Serviço/hora</ion-label>
-        <ion-input formControlName="valor1" [(ngModel)]="valor1" type="number" text-right></ion-input>
+        <ion-input formControlName="valor1" [(ngModel)]="valor1" type="text" text-right [brmasker]="{money: true, decimal: 2}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="profissao1 == 'advogado'"> 
+      <ion-item>
+        <ion-label>Valor do Serviço/Caso</ion-label>
+        <ion-input formControlName="valor1" [(ngModel)]="valor1" type="text" text-right [brmasker]="{money: true, decimal: 2}"></ion-input>
       </ion-item>
     </ion-list>
 
@@ -36,10 +42,17 @@
         </ion-item>
       </ion-list>
   
-      <ion-list>
+      <ion-list *ngIf="profissao2 != 'advogado'">
         <ion-item>
           <ion-label>Valor do Serviço/hora</ion-label>
-          <ion-input formControlName="valor2" [(ngModel)]="valor2" type="number" text-right></ion-input>
+          <ion-input formControlName="valor2" [(ngModel)]="valor2" type="text" text-right [brmasker]="{money: true, decimal: 2}"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngIf="profissao2 == 'advogado'">
+        <ion-item>
+          <ion-label>Valor do Serviço/Caso</ion-label>
+          <ion-input formControlName="valor2" [(ngModel)]="valor2" type="text" text-right [brmasker]="{money: true, decimal: 2}"></ion-input>
         </ion-item>
       </ion-list>
       <button ion-button block type="submit" [disabled]="formProf.invalid">Salvar</button>

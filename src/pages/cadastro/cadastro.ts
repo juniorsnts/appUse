@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AutenticacaoProvider } from '../../providers/autenticacao/autenticacao';
 import SHA_256 from 'sha256';
+import { FormDPessoalPage } from '../form-d-pessoal/form-d-pessoal';
 
 @IonicPage({
   name: "cadastro"
@@ -52,7 +53,7 @@ export class CadastroPage {
             position: 'bottom'
           });
           toast.present();
-          this.navCtrl.setRoot('dados-pessoais', {email: this.email});       
+          this.navCtrl.setRoot(FormDPessoalPage, {email: this.email});       
         } else if(resp == 'emailExiste'){
           let alert = this.alertCtrl.create({
             title: 'Email existente',

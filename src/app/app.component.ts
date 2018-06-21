@@ -5,11 +5,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 //imports pages
 import { HomePage } from '../pages/home/home';
+import { FormDPessoalPage } from '../pages/form-d-pessoal/form-d-pessoal';
+import { FormDProfissionalPage } from '../pages/form-d-profissional/form-d-profissional';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = 'dados-pessoais';
+  rootPage:any = "cadastro";
 
   constructor(
     platform: Platform, 

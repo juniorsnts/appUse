@@ -3,11 +3,12 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DadosFormulariosProvider } from '../../providers/dados-formularios/dados-formularios';
-import cep from 'cep-promise';
+import { UploadFotoProvider } from '../../providers/upload-foto/upload-foto';
+import buscaCep from 'busca-cep';
+import { FormDProfissionalPage } from '../form-d-profissional/form-d-profissional';
 
-@IonicPage({
-  name: 'dados-pessoais'
-})
+
+@IonicPage()
 @Component({
   selector: 'page-form-d-pessoal',
   templateUrl: 'form-d-pessoal.html',
@@ -16,7 +17,6 @@ export class FormDPessoalPage {
 
   //dados recebidos do html(inputs) e enviar para bd
   nome = "";
-  cepUsuario = "";
   endereco = "";
   numCasa = "";
   complemento = "";
@@ -26,10 +26,14 @@ export class FormDPessoalPage {
   telefone = "";
   cpf = "";
   base64Image = "";
+  photoUpload= "";
+  validacep = false;
+
   
   formPessoal: FormGroup;
 
   constructor(
+    private uploadFoto: UploadFotoProvider,
     private toastCtrl: ToastController,
     private dadosFormulario: DadosFormulariosProvider,
     private camera: Camera,
@@ -40,7 +44,7 @@ export class FormDPessoalPage {
       
       this.formPessoal = this.formBuilder.group({
         nome: ['', Validators.compose([Validators.required])],
-        cepUsuario: ['', Validators.compose([Validators.required])],
+        cepUsuario: ['', Validators.required],
         endereco: ['', Validators.compose([Validators.required])],
         numCasa: ['', Validators.compose([Validators.required])],
         complemento: [''],
@@ -53,8 +57,24 @@ export class FormDPessoalPage {
       
   }
 
+  
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad FormDPessoalPage');
+  }
+
+  buscadorCep(cepDigitado){
+    buscaCep(cepDigitado).then(res => {
+      console.log(res);
+      this.endereco = res.logradouro;
+      this.complemento = res.complemento,
+      this.bairro = res.bairro;
+      this.cidade = res.localidade;
+      this.estado = res.uf;
+      this.validacep = false;
+    }, err => {
+      this.validacep = true;
+    });
   }
 
   addPhoto(type){
@@ -74,24 +94,15 @@ export class FormDPessoalPage {
       options.sourceType = this.camera.PictureSourceType.PHOTOLIBRARY;
     }
     this.camera.getPicture(options).then((imageData)=>{
-      this.base64Image = 'data:image/jpeg;base64,'+imageData;   
-      //ENVIAR PRO SERVIDOR E SALVAR O CAMINHO NO BANCO COM O NOME DO USUARIO
-      console.log(this.base64Image);   
+      this.base64Image = 'data:image/jpeg;base64,'+imageData;  
+      this.photoUpload = imageData;
     }, (err) => {
       console.log('imagem nao carregada');
     });     
   }
 
-  buscaCep(cepDigitado){
-    cep(cepDigitado).then(res =>{
-      this.endereco = res.street;
-      this.bairro = res.neighborhood;
-      this.cidade = res.city;
-      this.estado = res.state;
-    }); 
-  }
-
-  salvarDados(){   
+  salvarDados(){
+    console.log("imagem=> "+this.photoUpload);
     let data = JSON.stringify({
       email: this.navParams.get('email'),
       nome: this.nome,
@@ -125,7 +136,7 @@ export class FormDPessoalPage {
                 position: 'bottom'
               });
               toast.present();
-              this.navCtrl.setRoot('dados-profissionais', {email: this.navParams.get('email')});
+              this.navCtrl.setRoot(FormDProfissionalPage, {email: this.navParams.get('email')});
             } else {
               let alert = this.alertCtrl.create({
                 message: 'Algo inesperado ocorreu!!! Tente mais tarde',
@@ -138,6 +149,9 @@ export class FormDPessoalPage {
       },
     {
       text: 'Cancelar',
+      handler: ()=>{
+        console.log('cancelar clicked');
+      }
     }]
     });
     confirmar.present();

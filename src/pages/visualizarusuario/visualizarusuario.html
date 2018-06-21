@@ -1,0 +1,82 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>visualizarusuario</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <h1 text-center>
+    <img src="{{fotoperfil}}"><ion-icon *ngIf="!fotoperfil" name="person-add" class="auth-icon"></ion-icon>
+  </h1>
+  
+    <ion-list *ngFor="let dadospessoais of dadosPessoais">
+      <ion-toolbar>
+          <p text-center><strong><u>DADOS PESSOAIS</u></strong></p>
+      <ion-item>
+        <ion-label>Nome Completo: </ion-label>
+        <ion-label><strong>{{dadospessoais.nome}}</strong></ion-label>                                
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Endereço: </ion-label>
+        <ion-label><strong>{{dadospessoais.endereco}}</strong></ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="complemento">        
+        <ion-label>Complemento: </ion-label>
+        <ion-label><strong>{{dadospessoais.complemento}}</strong></ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Cidade: </ion-label>
+        <ion-label><strong>{{dadospessoais.cidade}}</strong></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estado: </ion-label>
+        <ion-label><strong>{{dadospessoais.estado}}</strong></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bairro: </ion-label>
+        <ion-label><strong>{{dadospessoais.bairro}}</strong></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Telefone: </ion-label>
+        <ion-label><strong>{{dadospessoais.telefone}}</strong></ion-label>
+      </ion-item>
+    </ion-toolbar>
+    </ion-list>
+
+    <ion-list *ngFor="let dadosprofissionais of dadosProfissionais">
+      <ion-toolbar>
+          <p text-center><strong><u>DADOS PROFISSIONAIS</u></strong></p>
+          <ion-item>
+            <ion-label>Profissão 1: </ion-label>
+            <ion-label><strong>{{dadosprofissionais.profissao1}}</strong></ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Valor da profissao 1: </ion-label>
+            <ion-label><strong>R$ {{dadosprofissionais.valor1}} por hora</strong></ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="profissao2">
+            <ion-label>Profissão 2: </ion-label>
+            <ion-label><strong>{{dadosprofissionais.profissao2}}</strong></ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="valor2">
+            <ion-label>Valor da Profissão 2: </ion-label>
+            <ion-label><strong>R$ {{dadosprofissionais.valor2}} por hora</strong></ion-label>
+          </ion-item>
+      </ion-toolbar>
+    </ion-list>
+    <ion-toolbar>
+      <p text-center><strong><u>MINHA LOCALIZAÇÃO</u></strong></p>
+    </ion-toolbar>
+        <div #map id="map"></div>  
+</ion-content>
+
