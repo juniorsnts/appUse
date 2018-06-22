@@ -5,9 +5,15 @@
   </ion-toolbar>
   </ion-header>
   <ion-content>
-    <h1 text-center>
-      <img src=""><ion-icon *ngIf="!img" name="person-add" class="auth-icon"></ion-icon>
-    </h1>
+    <ion-item>
+        <div class="circleMenu">
+            <img src="{{fotoperfil}}">
+            <ion-icon *ngIf="!fotoperfil" name="person-add" class="auth-icon"></ion-icon>
+        </div>
+        <br>
+      <h2 text-center>nomeUsuario</h2>
+      <p text-center>statusUsuario</p>
+    </ion-item>
       <ion-item>
         <ion-icon name="person" item-left></ion-icon>
         <ion-label>CONTA</ion-label>
@@ -44,11 +50,13 @@
 </ion-header>
 
 <ion-content>
+<ion-item>
+  <div class="circle">
+    <img src="{{fotoperfil}}">
+    <ion-icon *ngIf="!fotoperfil" name="person-add" class="auth-icon"></ion-icon>
+  </div>
+</ion-item>
 
-  <h1 text-center>
-    <img src="{{fotoperfil}}"><ion-icon *ngIf="!fotoperfil" name="person-add" class="auth-icon"></ion-icon>
-  </h1>
-  
     <ion-list *ngFor="let dadospessoais of dadosPessoais">
       <ion-toolbar>
           <p text-center><strong><u>DADOS PESSOAIS</u></strong></p>

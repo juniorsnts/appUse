@@ -60,6 +60,7 @@ export class HomeContratantePage {
 
   adicionaMarcador(){
     this.locations.localizacaoGeral().then(resp => {
+      console.log(resp);
       this.marcadores = resp;
       for(let i=0; i<this.marcadores.length; i++){
         let marcador = new google.maps.Marker({

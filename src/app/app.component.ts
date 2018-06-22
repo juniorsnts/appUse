@@ -11,7 +11,7 @@ import { FormDProfissionalPage } from '../pages/form-d-profissional/form-d-profi
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = "cadastro";
+  rootPage:any = FormDPessoalPage;
 
   constructor(
     platform: Platform, 

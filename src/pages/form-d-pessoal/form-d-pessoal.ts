@@ -102,7 +102,7 @@ export class FormDPessoalPage {
   }
 
   salvarDados(){
-    console.log("imagem=> "+this.photoUpload);
+    this.uploadFoto.uploadImage("teste", this.photoUpload);
     let data = JSON.stringify({
       email: this.navParams.get('email'),
       nome: this.nome,

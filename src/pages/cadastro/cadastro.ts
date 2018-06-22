@@ -57,7 +57,10 @@ export class CadastroPage {
         } else if(resp == 'emailExiste'){
           let alert = this.alertCtrl.create({
             title: 'Email existente',
-            message: 'Esse email já foi cadastrado'
+            message: 'Esse email já foi cadastrado',
+            buttons: [{
+              text: 'ok'
+            }]
           });
           alert.present();
         } else {

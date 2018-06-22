@@ -23,6 +23,7 @@ import { UploadFotoProvider } from '../providers/upload-foto/upload-foto';
 import { LocalizacaoGeralProvider } from '../providers/localizacao-geral/localizacao-geral';
 import { FormDPessoalPage } from '../pages/form-d-pessoal/form-d-pessoal';
 import { FormDProfissionalPage } from '../pages/form-d-profissional/form-d-profissional';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FormDProfissionalPage } from '../pages/form-d-profissional/form-d-profi
     FormDProfissionalPage
   ],
   providers: [
+    AndroidPermissions,
     File,
     FileTransfer,
     Geolocation,

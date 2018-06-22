@@ -24,15 +24,15 @@ export class HomePage {
   constructor(
     private navParams: NavParams,
     private getDados: DadosUsuarioProvider,
-    public navCtrl: NavController) {
-
+    public navCtrl: NavController) {      
+      
       let data = JSON.stringify({
-        email: this.navParams.get('email')
+        email: "teste@gmail.com"
       });
 
       this.getDados.dadosUsuarioPessoal(data).then(resp =>{
         this.dadosPessoais = resp;      
-        this.fotoperfil = this.dadosPessoais[0].fotoperfil;
+        this.fotoperfil = "http://useserver.duckdns.org:3005/uploads/undefined-1529690890294.jpeg";
         this.complemento = this.dadosPessoais[0].complemento;
       });
       

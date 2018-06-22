@@ -3,5 +3,31 @@ page-home {
     #map {
         height: 30%;
     }
+
+    .circle {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        margin-left: 30%;
+      }
+
+    .circleMenu {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        margin-left: 22%;
+      }
+      
+      .circle img {
+        bottom: 0;
+        width: 100%;
+      }
+
+      .circle ion-icon {
+        bottom: 0;
+        width: 100%;
+      }
     
 }
